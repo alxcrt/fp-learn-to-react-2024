@@ -1,10 +1,9 @@
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import CreatePostForm from "../CreatePostForm";
 import Tweet from "../Tweet";
 import styles from "./Home.module.css";
-import { tweets } from "../../utils/tweets";
 import { fetchTweets } from "../../utils/getTweets";
-import { useEffect, useState } from "react";
 
 const Feed = styled.div`
   max-width: 42rem;
@@ -15,50 +14,57 @@ const Feed = styled.div`
 `;
 
 export default function Home() {
+  const [tweets, setTweets] = useState([]);
+
+  const fetchData = async () => {
+    const response = await fetchTweets();
+    setTweets(response);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <main className={styles.home}>
       <Feed>
         <div className="border-b border-slate-400 p-4">
-          <CreatePostForm />
+          <CreatePostForm postTweet={setTweets} />
         </div>
-        {
-          <div className="flex flex-col">
-            {tweets.map((tweet) => (
-              <Tweet key={tweet.id} tweet={tweet} />
-            ))}
-          </div>
-        }
+        <div className="flex flex-col">
+          {tweets.length ? (
+            tweets.map((tweet) => <Tweet key={tweet.id} tweet={tweet} />)
+          ) : (
+            <div>Loading...</div>
+          )}
+        </div>
       </Feed>
     </main>
   );
 }
 
 // const BadStopWatch = () => {
-//   const [counter, setCounter] = useState(0);
+//   const [time, setTime] = useState(0);
 //   useEffect(() => {
-//     setInterval(() => {
-//       setCounter((c) => c + 0.1);
-//     }, 100);
+//     setInterval(() => setTime((p) => p + 0.1), 100);
 //   }, []);
+
 //   return (
-//     <>
-//       <p>BadStopWatch: {counter.toFixed(1)} s</p>
-//     </>
+//     <div className="m-2">
+//       <p>BadStopWatch : {time.toFixed(1)}</p>
+//     </div>
 //   );
 // };
-
 // const GoodStopWatch = () => {
-//   const [counter, setCounter] = useState(0);
+//   const [time, setTime] = useState(0);
 //   useEffect(() => {
-//     const intervalId = setInterval(() => {
-//       setCounter((c) => c + 0.1);
-//     }, 100);
+//     const intervalId = setInterval(() => setTime((p) => p + 0.1), 100);
 //     return () => clearInterval(intervalId);
 //   }, []);
 
 //   return (
-//     <>
-//       <p>GoodStopWatch: {counter.toFixed(1)} s</p>
-//     </>
+//     <div className="m-2">
+//       <p>GoodStopWatch : {time.toFixed(1)}</p>
+//     </div>
 //   );
 // };
