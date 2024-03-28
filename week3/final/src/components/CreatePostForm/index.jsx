@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { tweets } from "../../utils/tweets";
 
 export default function CreatePostForm({ postTweet }) {
-  const [inputState, setInputState] = useState("");
+  const [inputState, setInputState] = useState("sdfdsfdsfsd");
 
-  const handleInputChange = (e) => {
-    setInputState(e.target.value);
-  };
+  const handleInputChange = useCallback(
+    (e) => {
+      console.log(inputState);
+      setInputState(e.target.value);
+    },
+    [inputState]
+  );
+
   const handleSubmit = () => {
     // e.preventDefault();
     const payload = {
