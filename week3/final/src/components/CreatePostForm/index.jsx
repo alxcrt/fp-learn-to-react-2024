@@ -1,6 +1,5 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 
-import { useCallback, useState } from "react";
 import { tweets } from "../../utils/tweets";
 import TextInput from "../TextInput/TextInput";
 
