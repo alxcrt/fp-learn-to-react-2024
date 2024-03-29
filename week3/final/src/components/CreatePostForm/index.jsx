@@ -1,8 +1,19 @@
-import { useCallback, useState } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
+
 import { tweets } from "../../utils/tweets";
+import TextInput from "../TextInput/TextInput";
 
 export default function CreatePostForm({ postTweet }) {
-  const [inputState, setInputState] = useState("sdfdsfdsfsd");
+  const [inputState, setInputState] = useState("");
+
+  //we initialize the inputRef
+  const inputRef = useRef(null);
+
+  //we use useEffect to focus on the inputRef when the component mounts
+  useEffect(() => {
+    if (!inputRef.current) return;
+    inputRef.current.focus();
+  }, []);
 
   const handleInputChange = useCallback(
     (e) => {
@@ -25,6 +36,7 @@ export default function CreatePostForm({ postTweet }) {
     postTweet((p) => [payload, ...p]);
     setInputState("");
   };
+
   return (
     <div className="flex gap-4 ">
       <img
@@ -32,7 +44,15 @@ export default function CreatePostForm({ postTweet }) {
         alt="avatar"
         className="h-14 w-14 rounded-full"
       />
-      <input
+      <TextInput
+        ref={inputRef} //we pass the inputRef to the TextInput component
+        // here we have another way to get the element we want, without
+        // using useRef  👇🏼
+
+        // ref={(input) => {
+        // 	if (!input) return;
+        // 	input.focus();
+        // }}
         type="text"
         placeholder="What's happening?"
         className="w-full border-0 bg-transparent outline-none"
