@@ -6,7 +6,7 @@ export default function LoadingSpinner() {
       <div role="status">
         <svg
           aria-hidden="true"
-          class="w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-slate-400"
+          className="w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-slate-400"
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -20,7 +20,7 @@ export default function LoadingSpinner() {
             fill="currentFill"
           />
         </svg>
-        <span class="sr-only">Loading...</span>
+        <span className="sr-only">Loading...</span>
       </div>
     </div>
   );
