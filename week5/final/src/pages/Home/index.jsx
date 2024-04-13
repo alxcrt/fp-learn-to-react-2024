@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import CreatePostForm from "../CreatePostForm";
-import Tweet from "../Tweet";
+import CreatePostForm from "../../components/CreatePostForm";
+import Tweet from "../../components/Tweet";
 import styles from "./Home.module.css";
 import { fetchTweets } from "../../utils/getTweets";
-import LoadingSpinner from "../LoadingSpinner";
-import LoginForm from "../LoginForm";
+import LoadingSpinner from "../../components/LoadingSpinner";
+import LoginForm from "../../components/LoginForm";
 import { postTweet } from "../../utils/postTweet";
 import { useTweets } from "../../hooks/useTweets";
 
