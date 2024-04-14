@@ -5,12 +5,9 @@ import { useAuth } from '../../hooks/useAuth';
 import styles from './Home.module.css';
 
 export default function Home() {
-	const authObject = useAuth();
-	console.log('authObject', authObject);
+	const { token } = useAuth();
 
-	const { tweets, post, loading, error } = useTweets(
-		authObject.token,
-	);
+	const { tweets, post, loading, error } = useTweets(token);
 
 	return (
 		<main className={styles.home}>
